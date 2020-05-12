@@ -17,27 +17,48 @@ public class TaskController {
     }
 
 
-    @GetMapping("/home")
+    @GetMapping
     public String home() {
         return "home";
     }
 
-    @GetMapping
+    @GetMapping("/add")
     public String add(Model model) {
         model.addAttribute("task", new Task());
         return "addForm";
     }
-    @GetMapping("/todo")
-    public String showToDoList(Model model){
-        model.addAttribute("todolist", taskRepository.showTasksToDO());
+
+    @GetMapping("/todolist")
+    public String showToDoList(Model model) {
+        model.addAttribute("list", taskRepository.showTasksToDo());
         return "list";
     }
+
+    @GetMapping("/donelist")
+    public String showDoneTasks(Model model) {
+        model.addAttribute("list", taskRepository.showDoneTasks());
+        return "list";
+    }
+
+    @GetMapping("/outdatedlist")
+    public String showOutDateTasks(Model model) {
+        model.addAttribute("list", taskRepository.showOutDateTasks());
+        return "list";
+    }
+
 
     @PostMapping("/add")
     public String add(Task task) {
         taskRepository.addNewTask(task);
         return "success";
     }
+
+    @PostMapping("/edit")
+    public String edit(Task task){
+
+    }
+
+
 
 
 }

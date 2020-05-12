@@ -18,20 +18,14 @@ public class Task {
     private LocalDate deadline;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfCompletion;
-    private double executionTimeInDays;
+    private int executionTimeInDays;
+    private int executionTimeInHours;
+    private int executionTimeInMinutes;
     @Enumerated(value = EnumType.STRING)
     private TaskType type;
     private boolean done;
 
     public Task() {
-    }
-
-    public TaskType getType() {
-        return type;
-    }
-
-    public void setType(TaskType type) {
-        this.type = type;
     }
 
     public Long getId() {
@@ -66,12 +60,36 @@ public class Task {
         this.dateOfCompletion = dateOfCompletion;
     }
 
-    public double getExecutionTimeInDays() {
+    public int getExecutionTimeInDays() {
         return executionTimeInDays;
     }
 
-    public void setExecutionTimeInDays(double executionTimeInDays) {
+    public void setExecutionTimeInDays(int executionTimeInDays) {
         this.executionTimeInDays = executionTimeInDays;
+    }
+
+    public int getExecutionTimeInHours() {
+        return executionTimeInHours;
+    }
+
+    public void setExecutionTimeInHours(int executionTimeInHours) {
+        this.executionTimeInHours = executionTimeInHours;
+    }
+
+    public int getExecutionTimeInMinutes() {
+        return executionTimeInMinutes;
+    }
+
+    public void setExecutionTimeInMinutes(int executionTimeInMinutes) {
+        this.executionTimeInMinutes = executionTimeInMinutes;
+    }
+
+    public TaskType getType() {
+        return type;
+    }
+
+    public void setType(TaskType type) {
+        this.type = type;
     }
 
     public boolean isDone() {

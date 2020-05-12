@@ -23,14 +23,28 @@ public class TaskRepository {
 
     //READ
     @Transactional
-    public List<Task> showTasksToDO() {
+    public List<Task> showTasksToDo() {
         TypedQuery<Task> query = entityManager.createQuery("SELECT t FROM Task t WHERE t.done=false AND t.deadline > CURDATE() ORDER BY t.deadline", Task.class);
         return query.getResultList();
     }
 
+    @Transactional
+    public List<Task> showDoneTasks() {
+        TypedQuery<Task> query = entityManager.createQuery("SELECT t FROM Task t WHERE t.done=true ORDER BY t.deadline", Task.class);
+        return query.getResultList();
+    }
+
+    @Transactional
+    public List<Task> showOutDateTasks() {
+        TypedQuery<Task> query = entityManager.createQuery("SELECT t FROM Task t WHERE t.done=false AND t.deadline <= CURDATE() ORDER BY t.deadline", Task.class);
+        return query.getResultList();
+    }
+
+
     //UPDATE
     @Transactional
-    public void update(Task taskToEdit, Task changed) {
+    public void update(Task changed) {
+        Task taskToEdit = new Task();
         taskToEdit.setDescription(changed.getDescription());
         taskToEdit.setDeadline(changed.getDeadline());
         taskToEdit.setDateOfCompletion(changed.getDateOfCompletion());
