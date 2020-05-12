@@ -13,16 +13,17 @@
     <!--    <ul>-->
     <!--        <li th:each="task: ${list}" th:text="|${task.description}|">Opis</li>-->
     <!--    </ul>-->
-        <div class="alert alert-warning" th:each="task: ${list}">
-            <div class="animal-info ml-2">
-                <span class="mb-8 mr-sm-8" th:text="${task.description}">Opis</span>
-                <span class="col-sm-6" th:text="${task.deadline}">Deadline</span>
-                <a th:href="@{|/edit?id=${task.id}|}">Edytuj zadanie</a>
-                <a th:href="@{|/finishNow?id=${task.id}|}">Ukończ teraz</a>
+    <div class="alert alert-warning" th:each="task: ${list}">
+        <div class="animal-info ml-2">
+            <span class="mb-8 mr-sm-8" th:text="${task.description}">Opis</span>
+            <span class="col-sm-6" th:text="${task.deadline}">Deadline</span>
+
+            <a th:href="@{|/finishNow?id=${task.id}|}" class="btn btn-primary mb-2">Ukończ teraz</a>
+            <a th:href="@{|/edit?id=${task.id}|}" class="btn btn-primary mb-2">Edytuj</a>
 
 
-            </div>
         </div>
+    </div>
 
 </div>
 </body>
