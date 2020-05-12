@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj zadanie</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+</head>
+<body>
+<form method="post" action="/add" class="container" th:object="${task}">
+    Opis zadania: <textarea class="form-control" th:field="*{description}" placeholder="Wpisz opis"></textarea></br>
+
+    Termin końcowy: <input class="form-control" type="date" th:field="*{deadline}">
+    Termin wykonanie: <input class="form-control" type="date" th:field="*{dateOfCompletion}">
+
+
+    Ilość dni wykonywania <input class="form-control" type="number" th:field="*{executionTimeInDays}" value="null">
+    Typ: <input type="text" th:field="*{type}" placeholder="Podaj typ">
+    Czy wykonano: <input class="form-control" th:type="text" th:field="*{done}" value="FALSE">
+    Wyslij: <input class="btn btn-primary" th:type="submit" value="Dodaj">
+
+
+</form>
+
+
+</body>
+</html>
