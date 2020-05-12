@@ -17,6 +17,9 @@
             <div class="animal-info ml-2">
                 <span class="mb-8 mr-sm-8" th:text="${task.description}">Opis</span>
                 <span class="col-sm-6" th:text="${task.deadline}">Deadline</span>
+                <a th:href="@{|/edit?id=${task.id}|}">Edytuj zadanie</a>
+                <a th:href="@{|/finishNow?id=${task.id}|}">Ukończ teraz</a>
+
 
             </div>
         </div>

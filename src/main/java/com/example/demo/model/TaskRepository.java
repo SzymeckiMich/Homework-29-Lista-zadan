@@ -43,14 +43,24 @@ public class TaskRepository {
 
     //UPDATE
     @Transactional
-    public void update(Task changed) {
-        Task taskToEdit = new Task();
-        taskToEdit.setDescription(changed.getDescription());
-        taskToEdit.setDeadline(changed.getDeadline());
-        taskToEdit.setDateOfCompletion(changed.getDateOfCompletion());
-        taskToEdit.setExecutionTimeInDays(changed.getExecutionTimeInDays());
-        taskToEdit.setType(changed.getType());
-        taskToEdit.setDone(changed.isDone());
-        boolean deprecated = changed.getDeadline().isBefore(LocalDate.now());
+    public void update(Task task) {
+        entityManager.merge(task);
+    }
+
+
+    public Task findById(Long id) {
+        TypedQuery<Task> query = entityManager.createQuery("SELECT t FROM Task t WHERE t.id = " + id, Task.class);
+        return query.getSingleResult();
+    }
+
+
+    @Transactional
+    public void finishNow(Task task) {
+        task.setExecutionTimeInMinutes(0);
+        task.setExecutionTimeInHours(0);
+        task.setExecutionTimeInDays(0);
+        task.setDateOfCompletion(LocalDate.now());
+        task.setDone(true);
+        update(task);
     }
 }
