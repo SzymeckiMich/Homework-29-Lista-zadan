@@ -7,16 +7,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+
 @Controller
 @RequestMapping("/")
 public class TaskController {
-
     private TaskRepository taskRepository;
-
     public TaskController(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
-
 
     @GetMapping
     public String home() {
@@ -45,7 +44,6 @@ public class TaskController {
         return "redirect:/";
     }
 
-
     @GetMapping("/todolist")
     public String showToDoList(Model model) {
         model.addAttribute("list", taskRepository.showTasksToDo());
@@ -55,28 +53,30 @@ public class TaskController {
     @GetMapping("/donelist")
     public String showDoneTasks(Model model) {
         model.addAttribute("list", taskRepository.showDoneTasks());
-        return "list";
+        return "archiveDoneList";
     }
 
     @GetMapping("/outdatedlist")
     public String showOutDateTasks(Model model) {
         model.addAttribute("list", taskRepository.showOutDateTasks());
-        return "list";
+        return "outdateList";
     }
-
 
     @PostMapping("/add")
     public String add(Task task) {
-        taskRepository.addNewTask(task);
-        return "redirect:/";
-
+        try {
+            task.setCreateOrEditDate(LocalDate.now());
+            taskRepository.addNewTask(task);
+            return "redirect:/";
+        } catch (Exception ex) {
+            return "error";
+        }
     }
 
     @PostMapping("/edit")
     public String edit(Task task) {
+        task.setCreateOrEditDate(LocalDate.now());
         taskRepository.update(task);
         return "redirect:/";
     }
-
-
 }

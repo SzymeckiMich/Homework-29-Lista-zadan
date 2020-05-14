@@ -53,7 +53,6 @@ public class TaskRepository {
         return query.getSingleResult();
     }
 
-
     @Transactional
     public void finishNow(Task task) {
         task.setExecutionTimeInMinutes(0);

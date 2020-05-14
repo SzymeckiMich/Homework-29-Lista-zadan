@@ -8,14 +8,14 @@
           crossorigin="anonymous">
 </head>
 <body>
+<header th:insert="navbar.html :: navbar"></header>
 
 <div class="container">
 
+
     <form th:action="${mode == 'edit' ? '/edit' : '/add'} " method="post" th:object="${task}">
-        <!--    <form action="/add" method="post" th:object="${task}">-->
 
         <input type="hidden" th:field="*{id}"/>
-
         Opis zadania: <textarea class="form-control" placeholder="Wpisz opis zadania"
                                 th:field="*{description}"></textarea>
         Deadline: <input class="form-control" type="date" th:field="*{deadline}"></br>
@@ -33,19 +33,13 @@
             </div>
         </div>
 
-
         Ukończono: <input type="checkbox" th:field="*{done}"></br></br>
-
-
         Data ukończenia: <input class="form-control" type="date" th:field="*{dateOfCompletion}">
         Ilość dni pracy:<input class="form-control" type="number" th:field="*{executionTimeInDays}">
         Ilość godzin pracy:<input class="form-control" type="number" th:field="*{executionTimeInHours}">
         Ilość minut pracy:<input class="form-control" type="number" th:field="*{executionTimeInMinutes}">
-
         </br>
         <input type="submit" class="btn btn-primary" value="Dodaj">
-
-
     </form>
 </div>
 

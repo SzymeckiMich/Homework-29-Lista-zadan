@@ -6,14 +6,16 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-//@Table(name = "Zadania")
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 100)
     private String description;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate createOrEditDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deadline;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -30,6 +32,14 @@ public class Task {
 
     public Long getId() {
         return id;
+    }
+
+    public LocalDate getCreateOrEditDate() {
+        return createOrEditDate;
+    }
+
+    public void setCreateOrEditDate(LocalDate createDate) {
+        this.createOrEditDate = createDate;
     }
 
     public void setId(Long id) {
