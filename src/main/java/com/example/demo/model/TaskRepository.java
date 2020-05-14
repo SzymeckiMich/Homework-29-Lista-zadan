@@ -40,13 +40,11 @@ public class TaskRepository {
         return query.getResultList();
     }
 
-
     //UPDATE
     @Transactional
     public void update(Task task) {
         entityManager.merge(task);
     }
-
 
     public Task findById(Long id) {
         TypedQuery<Task> query = entityManager.createQuery("SELECT t FROM Task t WHERE t.id = " + id, Task.class);
