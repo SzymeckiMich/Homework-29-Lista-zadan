@@ -14,6 +14,9 @@
 
 
     <form th:action="${mode == 'edit' ? '/edit' : '/add'} " method="post" th:object="${task}">
+
+        <input type="hidden" th:field="*{id}" />
+
         Opis zadania: <textarea class="form-control" placeholder="Wpisz opis zadania"
                                 th:field="*{description}"></textarea>
         Deadline: <input class="form-control" type="date" th:field="*{deadline}"></br>
